@@ -1,0 +1,359 @@
+________________________________________________________________________________________________________________________________________________________________________________________
+
+Dentro do CSS:
+
+-------------------------------------------------------------------------- // --------------------------------------------------------------------------
+
+Colocar a imagem de fundo (background) dentro da tag body.
+
+body{
+    background-image: url('./assets/Valorant_BackGround.jpg'); 
+}
+
+-------------------------------------------------------------------------- // --------------------------------------------------------------------------
+
+Estilização da Header:
+
+1. Estilização da tag de âncora <a>:
+
+a{
+    text-decoration: none;
+}
+
+-------------------------------------------------------------------------- // --------------------------------------------------------------------------
+
+2. Estilização da tag header <header>:
+
+header{
+    height: 70px;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+}
+
+height para ajustar a altura, display flex para possibilitar o ajustamento dos itens.
+
+-------------------------------------------------------------------------- // --------------------------------------------------------------------------
+
+3. Estilização das classes da tag <header>:
+
+. Começando pela classe .logo: A caixa e espaço em que o logo e o span estão inseridos:
+
+.logo{
+    width: 250px;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+Alinhamento dos itens e suas medidas padrões.
+
+
+
+. Classe .logo-img: Imagem da logo:
+
+.logo-img{
+    width: 40%;
+    height: auto;  /* Ficar em boa qualidade */
+}
+
+Acerto na dimensão da imagem.
+
+
+
+. Classe .logo-text: Texto <span> que está contido junto com a imagem:
+
+.logo-text{
+    font-family: 'VALORANT', sans-serif;
+    font-size: 1rem;
+}
+
+Adição da fonte e o uso do rem como medida, pois o tamanho da fonte padrão do HTML é de 16px, e ao colocar 1rem, estamos nos referindo à ele ( 16px ). E caso queiramos mudar algo
+futuramente em relação ao tamanho, teremos como referência os 16px = 1rem.
+
+
+
+. Classe .social-media: Os ícones:
+
+.social-media{
+    width: 130px;
+    display: flex;
+    justify-content: space-between;
+}
+
+Acerto na dimensão e space-between para dar espaçamento entre eles.
+
+
+-------------------------------------------------------------------------- // --------------------------------------------------------------------------
+
+4. Estilização dos ícones <i> com hover:
+
+i{
+    font-size: 1.2rem;
+}
+
+i:hover{
+    color: #eb4e58;
+}
+
+
+Ajuste no tamanho e Mudança de cor ao passar com o mouse em cima
+
+-------------------------------------------------------------------------- // --------------------------------------------------------------------------
+
+5. Estilização da div main-container:
+
+.main-container{
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    width: 100%;
+    padding: 20px 0;
+}
+
+Display para possibilitar os tipos de ajustamentos, flex direction para organizar a forma que o elemento se comporta, width para redimensionar a img e o padding
+para 20px em cima e em baixo e 0 para direita e esquerda
+
+
+-------------------------------------------------------------------------- // --------------------------------------------------------------------------
+
+6. Estilização do h2:
+
+h2{ 
+    font-family: 'VALORANT', sans-serif;
+    margin-bottom: 20px;
+    color: white;
+    font-weight: 300;  
+}
+
+font-weight é a largura da fonte.
+
+
+-------------------------------------------------------------------------- // --------------------------------------------------------------------------
+
+7. Estilização main-content:
+
+.main-content{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    column-gap: 20px;
+    row-gap: 10px;
+    padding: 0 20px;
+}
+
+. flex-wrap: Ao invés dos cards ficarem na mesma linha, quando chega no final do espaço do container, ao invés de estreitar os cards, ele joga para a linha de baixo. Poderia 
+  até ser usado o display grid, porém o wrap acaba sendo mais vantajoso.
+
+. column-gap: Dar espaçamento entre os componentes em vertical. Ao invés de dar um margin de elemento por elemento, ao dar um column-gap todos os elementos filhos ficarão por padrão na 
+  medida colocada. Sendo assim, o espaço em vertical entre eles será de 20px.
+
+. row-gap: Dar espaçamentos entro os componentes em horizontal. Assim como o column-gap, porém se aplica na horizontal.
+
+.padding: 0 para cima e baixo e 10px para direita e esquerda.
+
+-------------------------------------------------------------------------- // --------------------------------------------------------------------------
+
+8. Estilização dos cards:
+
+.cards{
+    width: 230px;
+    height: 470px;
+    background-position: 50% 50%;
+    background-size: cover;
+    display: flex;
+    align-items: end;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: 0.5s;
+    padding: 5px;
+}
+
+. background-position: 50% 50%  -> utiliza-se pois estamos usando a img dos cards como plano de fundo. E usamos 50% 50% pois cada um é um alinhamento, sendo ele horizontal e outro vertical,
+  dito isso, essa medida centraliza a imagem em si.
+
+. background-size: cover -> para ocupar todo o espaço do bloco da div.
+
+. align-items: end -> Pois o nome dos personagens ficarão no final (na parte de baixo)  
+
+. padding: 5px -> em todas as laterais.
+
+-------------------------------------------------------------------------- // --------------------------------------------------------------------------
+
+9. Adição do hover para a classe de cards: Aumentar um pouco do tamanho do cards
+
+.cards:hover{
+    transform: scale(1.03);
+}
+
+-------------------------------------------------------------------------- // --------------------------------------------------------------------------
+
+10. Estilização da classe character-name-bg:
+
+.character-name-bg{
+    width: 100%;
+    height: 30px;
+    background-color: rgb(0,0,0,0.4);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 10px;
+}
+
+
+. background-color: 0 para todas as cores, e o 0.4 é sua opacidade, foi usado para criar um bloco "esfumaçado/transparente"
+
+-------------------------------------------------------------------------- // --------------------------------------------------------------------------
+
+11. Estilização character-name:
+
+.character-name{
+    font-family: "Anton", sans-serif;
+    font-size: 1rem;
+    font-weight: 500;
+}
+
+-------------------------------------------------------------------------- // --------------------------------------------------------------------------
+
+12. Estilização do buttons:
+
+. Local onde se situa o button:
+
+.buttons{
+    width: 83%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 20px;
+}
+
+. O button em si:
+
+button{
+    width: 70px;
+    height: 25px;
+    background-color: #da3d48;
+    color: white;
+    font-weight: 700;
+    border-radius: 3px;
+    cursor: pointer;
+    border: 1px solid black;
+    outline: none;
+    transition: 0.3s;
+}
+
+. hover do button:
+
+button:hover{
+    background-color:white;
+    color: #0f1923;
+}
+
+#back-button{
+    visibility: hidden;
+}
+
+
+O #back-button foi escondido com visibility: hidden; Isso significa que o elemento se encontra lá, porém está escondido. E esconderemos ele inicialmente.
+
+-------------------------------------------------------------------------- // --------------------------------------------------------------------------
+
+13. Estilização do footer:
+
+footer{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    row-gap: 10px;        /* Espaçamento Horizontal */
+    margin: 40px 0 20px 0;
+}
+
+margin: 40px em cima  / 0px na direita / 20px em baixo / 0px na esquerda.
+
+.footer-logo{
+    font-family: 'VALORANT', sans-serif;
+    font-size: 1.5rem;
+    font-weight: 500;
+}
+
+.copyright{
+    font-family: "Anuphan", sans-serif;
+    font-weight: 500;
+}
+
+-------------------------------------------------------------------------- // --------------------------------------------------------------------------
+
+14. Estilização do modal:
+
+.modal{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100vw;  vw = view width
+    height 100vh;  vh = view height
+    background-color: rgb(0,0,0,0,6);   Transparência/Escurece a página quando for clicado o card
+    position: fixed;   manter o modal fixo na tela independente do que aconteça.
+    top: 0;   modal comece exatamente no topo da tela do usuário
+}
+
+-------------------------------------------------------------------------- // --------------------------------------------------------------------------
+
+15. Estilização do modal-contet:
+
+.modal-content{
+    width: 25vw;
+    height: 70vh;
+    background-color: ; escolher o que for melhor para a página.
+    border-radius: 12px;
+    display: flex;
+    flex-direction: column;  as infos ficar um em baixo da outra.
+    row-gap: 15px;   espaçamento horizontal
+    padding: 30px 10px;   30 em cima e baixo e 10 nos lados 
+    align-items: center;
+}
+
+-------------------------------------------------------------------------- // --------------------------------------------------------------------------
+
+16. Estilização do character-image:
+
+.character-image {
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;              -> perfeitamente redonda
+    background-position: 50% 10%     -> Alinhado horizontalmente e 10% para regiao da cabeça. Em nosso caso nao será necessário o background-position
+    background-size: cover;
+}
+
+-------------------------------------------------------------------------- // --------------------------------------------------------------------------
+
+17. Estilização do character-details:
+
+.character-details {
+    font-family: *colocar o desejado*
+    font-size: 1rem;
+    font-weight: lighter;
+    color: *colocar o desejado*
+}
+
+-------------------------------------------------------------------------- // --------------------------------------------------------------------------
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

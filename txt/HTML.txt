@@ -1,0 +1,234 @@
+  O script será criado dentro da tag <body>, pois as metaTags acima são executadas antes dos componentes do <body> serem carregadas em tela, e como nós usamos o arquivo JS para poder 
+manipular os elementos que ficarão dentro de body e possam aparecer em tela , não é adequado colocarmos ele nas metaTags.
+
+DICAS:
+
+. Flex:
+
+  Quando colocamos essa propriedade em um elemento, esse elemento se torna um flex container, a partir daí podemos manipular todos os elementos filhos desse flex container com propriedades
+  novas. Flexbox é ótimo para organizar itens em uma única linha ou coluna, como um menu de navegação.
+
+. Grid:
+
+  O grid tem como principal objetivo auxiliar na ordenação, distribuição, alinhamento e dimensão de imagens, textos, formas e outros elementos. Em resumo, ele organiza todas as informações
+  dentro da estrutura de uma peça de comunicação visual, ajudando o designer a manter a harmonia visual do layout. Grid é perfeito para criar layouts mais complexos, como a página de um 
+  jornal, onde você precisa de várias linhas e colunas.
+
+________________________________________________________________________________________________________________________________________________________________________________________
+
+Colocando o icon na página:
+
+Embaixo da linkagem do CSS, adicionar um link:favicon e renomear em href o caminho do logo em si:
+
+<link rel="shortcut icon" href="./assets/Valorant Icon.jpg" type="image/x-icon">
+
+________________________________________________________________________________________________________________________________________________________________________________________
+
+Importar a fonte e a biblioteca de ícone:
+
+Importar a fonte para o CSS e jogar o font family para o CSS:
+    
+    @import url('https://fonts.cdnfonts.com/css/valorant');
+    font-family: 'VALORANT', sans-serif;
+
+Importando os ícones:
+
+. Entrar em fontawesome. (já tenho conta)
+. Ir para a aba do meio e entrar em set up, dentro dele ele dará um código para transferir dentro do HTML.
+. Colar o código na tag <body> junto com a tag de script: <script src="https://kit.fontawesome.com/3c43c4a2f9.js" crossorigin="anonymous"></script>
+
+
+Adicionando os ícones:
+
+. Na tag <body> criar uma tag <i> de ícone e daremos uma classe à ela.
+. Referindo-se a classe, ela estará disponível dentro do site quando clicar no ícone: 
+
+    <i class="fa-brands fa-github"></i>
+    <i class="fa-brands fa-linkedin"></i>
+    <i class="fa-brands fa-instagram"></i>
+
+________________________________________________________________________________________________________________________________________________________________________________________
+
+Dentro do HTML:
+
+A priori, formataremos da seguinte forma para que tudo aconteça dentro do padrão:
+
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    list-style: none;
+    color: white;
+}
+
+list-style e o color são para que a página não fique com o marca-texto em roxo.
+
+________________________________________________________________________________________________________________________________________________________________________________________
+
+1. Fazendo a Header:
+
+Dentro de Header teremos 2 div: !! COLOCAR target = "_blank" NAS ÂNCORAS !!
+
+1. Div do Logo e o span, envolvendo-os em âncora.
+2. Div das Redes e ícones, ancorando para redirecionar para as redes sociais.
+3. Após isso, iremos para a primeira estilização no CSS.
+
+-------------------------------------------------------------------------- // --------------------------------------------------------------------------
+
+Div logo: levando em consideração que estão todos entro da <header>.
+
+. Adicionaremos uma imagem chamando pela tag <img/> fechando em si mesma. Adicionadno o seu src e criando uma classe como "logo-img".
+
+. Adicionar um span <span> e dar uma classe de logo-text e em seu conteúdo colocaremos Characters.
+
+    <div class="logo">
+            <img src="./assets/Valorant_Logo.png" alt="logo" class="logo-img">
+            <span class="logo-text">Characters</span>
+    </div>
+
+-------------------------------------------------------------------------- // --------------------------------------------------------------------------
+
+Div ícones: 
+
+. Adicionaremos uma div de classe "social-media".
+. Dentro da div, será adicionado os ícones.
+. Explicação acima na linha 28:
+
+        <div class="social-media">
+            
+            <i class="fa-brands fa-github"></i>
+            <i class="fa-brands fa-linkedin"></i>
+            <i class="fa-brands fa-instagram"></i>
+
+        </div>
+
+-------------------------------------------------------------------------- // --------------------------------------------------------------------------
+
+Feito Isso, iremos envolve-las com uma tag âncora <a> , sua href será o ./index, dentro dele jogaremos todo o conteúdo que corresponde ao logo.
+Isso se faz pois ao clicar no logo, a pagina redirecionará para a Home Page:
+
+        <a href="./index.html">
+            
+            <div class="logo">
+                <img src="./assets/Valorant_Logo.png" alt="logo" class="logo-img">
+                <span class="logo-text">Characters</span>
+            </div>
+            
+        </a>
+
+-------------------------------------------------------------------------- // --------------------------------------------------------------------------
+
+O mesmo se faz com o social media, porém cada âncora será diferente para cada item, pois sao diferentes tipos de redes sociais:
+
+        <div class="social-media">
+            
+            <a href="https://github.com/ViniKato01">
+                <i class="fa-brands fa-github"></i>
+            </a>
+            
+            <a href="https://www.linkedin.com/in/vinicius-kato-620342243/">
+                <i class="fa-brands fa-linkedin"></i>
+            </a>
+            
+            <a href="https://www.instagram.com/_vinikato/">
+                <i class="fa-brands fa-instagram"></i>
+            </a>
+
+        </div>
+
+________________________________________________________________________________________________________________________________________________________________________________________
+
+2. Criando o container principal: Títulos e os cards
+
+div class main-container e dentro dela teremos:
+
+-------------------------------------------------------------------------- // --------------------------------------------------------------------------
+
+. h2: Título -> Conheca os personagens de Valorant em um so lugar.
+
+     <h2>Conheca todos os personagens de Valorant em um so lugar</h2>
+
+-------------------------------------------------------------------------- // --------------------------------------------------------------------------
+
+. div class = main-content e dar um id = main-content: quando usarmos JS, manipularemos esse elemento através do ID, daremos também um style = "background-image" junto com uma url 
+  e colocar o link da imagem dos personagens dentro da div de cards, pois como a imagem ficará como imagem de fundo, ela será a bg da div cards.
+
+    <div class="main-content" id="main-content">
+
+-------------------------------------------------------------------------- // --------------------------------------------------------------------------
+
+.div main-content: criaremos os cards
+
+    <div class="main-content" id="main-content">
+        <div class="cards" style = "background-image: url('./img/01.\ Brimstone.jpg');">
+            <div class="character-name-bg">
+                <span class="character-name">Brimstone</span>
+            </div>
+        </div>
+    </div>
+
+
+Cria-se uma div class cards, dentro dela uma div class characters-name-bg (essa classe será o container no qual situacionará o nome dos personagens). 
+Dentro da classe characters-name-bg, colocaremos um span de class character-name e escreveremos um nome dos personagens, um adendo é que ao escreveremos o nome de cada personagem 
+dentro de HTML será de forma estática, porém em JS ao consumirmos uma API, isso será colocado de forma automática.
+
+Sobre as img em API, no projeto original da aula (Star Wars) o url tem um ID, pois foi pega através de um visual guide, no qual consome diretamente uma API, no caso desse projeto
+adaptaremos ao valorant.
+
+
+Após feito tudo isso, iremos repetir em 10x a div de cards, pois 10 é o número de retorno que teremos da API.
+
+________________________________________________________________________________________________________________________________________________________________________________________
+
+3. Criar 2 elementos: Botões de 'Próxima' e 'Anterior' e a adição do footer.
+
+Botões 'Próxima' e 'Anterior':
+
+    <div class="buttons">
+        <button id="back-button" disabled>Anterior</button>
+        <button id="next-button" disabled>Próxima</button>
+    </div>
+
+
+. Criar uma div para os botões  final da div main-container e fora da main-content, e dentro dele, adicinar 2 botões, cada um deles terão um id diferente, sendo em id para
+  possamos manipula-lo dentro do JS:
+
+. Dentro dos botões, colocaremos um atributo disabled, incialmente eles estarão desabilitados, e iremos habilita-los dentro do JS conforme o retorno da API. Ou seja, conforme o resultado
+  da API, se houver uma página posterior o botão ficará habilitado, assim aplica-se para ambos botões.
+
+-------------------------------------------------------------------------- // --------------------------------------------------------------------------
+
+Footer: 
+
+<footer>
+    <p class="footer-logo">Valorant Characters</p>
+    <p class="copyright">Desenvolvido por &copy; Vinicius Kato</p>
+</footer>
+
+
+. Criar fora de main-container.
+
+. Dentro de footer, colocar 2 parágrafos <p>:
+
+O primeiro terá a classe de footer-logo, e escreveremos -> Valorant Characters.
+O segundo terá a classe de copyright, e escreveremos  -> Desenvolvido por &copy; Vinicius Kato (isso gerará o símbolo de copyright)
+
+
+________________________________________________________________________________________________________________________________________________________________________________________
+
+CRIAÇÃO DO MODAL NOS CARDS: isso após fazer todo o processo dentro do JS.
+
+Voltar ao HTML e, dentro da div main-container começar a cria-lo:
+
+<div class="modal" id="modal" onclick="hideModal()"></div>
+
+. Criar div de classe e id modal, pois esse será o endereço usado para manipularmos.
+
+. Adicionar uma função onclick, e nele executaremos uma função, o qual fechará esse modal, ou seja, ao clicar, ele abrirá o modal e quando clicarmos em qualquer outro lugar ele executará 
+  essa função, ou seja, fechará o modal -> onclick = "hideModal()". Isso pode ser manipulado pelo HTML ou pelo JS.
+
+. Dentro da div modal, será criado uma outra div de classe e id "modal-content".
+
+
+
+

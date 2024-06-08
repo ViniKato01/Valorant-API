@@ -1,0 +1,38 @@
+____________________________________________________________________________________________________________________
+
+Objetivos:
+
+. O objetivo é trazer informações à cerca dos personagens de Valorant.
+
+. Os cards que terão na tela não serão estáticos.
+
+. Consumo de uma API. 
+
+. Será usado o JS para consumir uma API com o uso do fetch.
+
+. Utilização do fetch para o conceito de consumo de dados de uma API externa e apresenta-los em tela.
+
+. Interface simples, com foco na lógica de JS.
+
+. Implementar, fazer requisição à API, consumi-la e manipular os elementos através do JS.
+
+____________________________________________________________________________________________________________________
+
+Interface:
+
+. O background será uma img importada.
+
+. Importar uma img para o ícone web.
+
+. Na header terá o Logo e os botões das redes sociais.
+
+. No corpo do site terão os cards dos personagens e na parte inferior terão botões de navegações.
+
+. A API retorna apenas 10 resultados por vez, por isso será implementado uma navegação. Com isso, ao clicar  
+  em 'Proxima' ele passará para uma outra página para fins de navegação, e quando for passada para essa nova
+  página, um botão 'Anterior' aparecerá.
+
+. Clicando nos cards, abrirá uma janela de informações extras.
+
+____________________________________________________________________________________________________________________
+

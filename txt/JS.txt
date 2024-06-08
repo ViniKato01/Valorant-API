@@ -1,0 +1,1153 @@
+________________________________________________________________________________________________________________________________________________________________________________________
+
+Dar a vida ao projeto:
+
+Aplicar na prática os conceitos das aulas de JS.
+
+________________________________________________________________________________________________________________________________________________________________________________________
+
+1. Criar uma variável de currentPageUrl:
+
+let currentPageUrl = 'https://dash.valorant-api.com/endpoints/agents'
+
+. Ela armazenará o url da API, ou seja, o end point da API que usaremos para podermos fazer a requisição e obter os dados da API.
+Passar a url para a variável.
+
+. Sendo a url https://dash.valorant-api.com/endpoints/agents, nós armazenamos dentro da variável, e usaremos ela para podermos fazer a requisição para a API usando fetch.
+
+. O let está sendo usado pois a variável terá o valor 'https://dash.valorant-api.com/endpoints/agents' inicialmente, ou seja, quando o projeto carregar pela primeira vez, a url
+que esta armazenada será essa, porém quando implementarmos uma navegação, essa url ficará em uma constante mudança, dito isso, com o uso de let podemos redeclarar a variável
+infinitas vezes, ao contrário de const, que possui um valor fixo.
+
+________________________________________________________________________________________________________________________________________________________________________________________
+
+2. Criar uma função dentro da variável, implementando o uso de try&catch async&await: 
+    
+window.onload = () -> {
+    try{
+        loadCharacters()
+    } catch(error){
+        console.log(error);
+        alert('Erro ao carregar cards')
+    }
+}
+
+. window.onload: é uma característica do JS de que quando uma página for carregada/recarregada, ela chamará determinada função.
+
+. Puxar uma arrow function e dentro dela chamar uma outra função. Essa segunda função chamada será a responsável por fazer a requisição
+para a API e gerar os cards.
+
+. Toda essa função será envolvida com try&catch:
+
+try: Tente fazer o que está contido dentro da chave. Será executado caso seu retorno seja True.
+
+catch: O que não der certo no try, o catch será executado.
+
+------------------------------------------------------------------------------- // --------------------------------------------------------------------------------
+
+Try&Catch:
+
+. Essa função loadCharacters será a função principal do projeto. Ela consiste em pegar a url da variável e fazer uma requisição para a API , trazendo resultados e transformando-os em cards.
+
+. () estamos chamando a função, e como seu argumento será passada a variável let currentPageUrl.
+
+. No catch podemos receber um error caso dê um erro na tentativa de execução da função, e caso aconteça esse erro, exibiremos console.log
+
+
+try{
+    loadCharacters(currentPageUrl)
+} cath(error) {
+    console.log(error);
+    alert('Erro ao carregar cards')
+}
+
+------------------------------------------------------------------------------- // --------------------------------------------------------------------------------
+
+Leitura desse algorítmo:
+
+let currentPageUrl = 'https://dash.valorant-api.com/endpoints/agents'
+
+window.onload = () => {
+    try{
+        loadCharacters(currentPageUrl);
+    } catch(Error){
+        console.log(Error);
+        alert('Erro ao carregar informações dos cards.')
+    }
+};
+
+. Toda vez que a página for carregada, ela chamará a função criada, pois estamos fazendo o uso do window.onload.
+
+. Dar um try&catch para executar a função e determinar situações.
+
+. Com o window.onload, a função apontada pela arrow function será chamada e fará a tentativa de executar outra função loadCharacters(currentPageUrl).
+
+. Seu critério e método de execução estão incluídos em try&catch.
+
+. Caso essa tentativa venha a dar errado, o catch será executado.
+
+------------------------------------------------------------------------------- // --------------------------------------------------------------------------------
+
+async&await:
+
+Como a função faz uma requisição para uma API, a função passa a depender do resultado dessa requisição para que possa gerar os card e executar suas tarefas, ou seja, acaba
+virando uma promise. Sendo assim, passaremos a tratar essa função como uma função assíncrona:
+
+window.onload = async () => {
+    try{
+        await loadCharacters(currentPageUrl);
+    } catch(Error){
+        console.log(Error);
+        alert('Erro ao carregar informações dos cards.')
+    }
+};
+________________________________________________________________________________________________________________________________________________________________________________________
+
+3. Criando o corpo do loadCharacters:
+
+
+. Faz o uso do async, visto que é uma função ->  async function loadCharacters()
+
+. A função loadCharacters terá o parâmetro da url e esperará, ou seja, toda vez que ela for chamada, ela irá esperar até que receba dentro dela uma url.
+
+. No await de loadCharacters, estamos chamando-o e colocando como argumento a variável (currentPageUrl) inicialmente.
+  Depois quando criarmos os botões, esses mesmos botões irão chamar essa mesma função (loadCharacters(url)) e passarão uma outra url dentro de (), no qual será o currentPageUrl porém 
+  com o valor alterado.
+
+------------------------------------------------------------------------------- // --------------------------------------------------------------------------------
+
+
+async function loadCharacters(url){
+    const mainContent = document.getElementById('main-content')
+    mainContent.innerHTML = '';
+}
+
+
+. Colocaremos uma const de nome mainContent, com o valor document.getElementById para pegar o ID dentro do HTML.
+
+. Estamos manipulando elementos usando o conceito de DOM (Document Object Model), essa variável pegará um elemento de dentro do HTML usando o Id.
+
+. Para pegar o elemento usando Id, basta abrir ('') e colocar o nome do elemento / id que queremos manipular. Nesse caso ('main-content'), dessa forma estaremos
+  acessando o id de dentro do documento HTML através do JS. E com isso, essa variável passa a representar tal elemento (nesse caso 'main-content').
+
+. Iremos pegar essa variável (no qual passa a ser o elemento main-content) e daremos um innerHTML e colocar como valor uma string vazia ''.
+
+. innerHTML: Modifica o HTML que está dentro de determinado elemento.
+
+. O innerHTML recebendo uma string vazia, ele vai limpar os resultados anteriores.
+
+------------------------------------------------------------------------------- // --------------------------------------------------------------------------------
+
+Leitura do algorítmo:
+
+window.onload = async () => {
+    try{
+        await loadCharacters(currentPageUrl);
+    } catch(Error){
+        console.log(Error);
+        alert('Erro ao carregar informações dos cards.')
+    }
+};
+
+ async function loadCharacters(url){
+    const mainContent = document.getElementById('main-content')
+    mainContent.innerHTML = '';
+}
+
+
+. A função que se localiza em window.onload, chama a função await loadCharacters dentro de try.
+
+. O async function loadCharacters é o que a loadCharacters fará.
+
+. Dentro de loadCharacters teremos a função que criará todos os cards.
+
+------------------------------------------------------------------------------- // --------------------------------------------------------------------------------
+
+Funcionamento da const mainContent:
+
+Para que quando clicarmos no botão de próximo ou anterior, se não limparmos o conteúdo primeiro, ficarão mais 10 cards acumulados na página e assim sucessivamente.
+Por isso ele limpará os resultados anteriores para que os próximos possam ser gerados.
+
+------------------------------------------------------------------------------- // --------------------------------------------------------------------------------
+
+Dentro dessa mesma função, criar um try&catch:
+
+async function loadCharacters(url){
+    const mainContent = document.getElementById('main-content')
+    mainContent.innerHTML = '';
+
+    try{
+        const response = await fetch(url);
+        const responseJson = await response.json();
+
+
+    } catch(error){
+        alert('Erro ao carregar os personagens')
+        console.log(error)
+    }
+}
+
+------------------------------------------------------------------------------- // --------------------------------------------------------------------------------
+
+Dentro do try:
+
+. Teremos 2 variáveis:
+
+------------------------------------------------------------------------------- // --------------------------------------------------------------------------------
+
+1 - const response: Armazenará os resultados dessa requisição
+
+const response = await fetch(url);
+
+
+Vamos atribuir à ele o método fetch e passa dentro dele a url que estamos recebendo. Passaremos a utilizar um await também, pois trata-se de uma requisição e ela é uma promise.
+
+
+O fetch fará a requisição para essa url:
+
+Essa url da API que também está sendo recebida na função loadCharacters é enviada para currentPageUrl 
+
+Explicação da "rota" da url:
+
+let currentPageUrl (pegando ela) -> await loadCharacters(currentPageUrl) (enviando a url para essa função) -> async function loadCharacters(url) (sendo recebida aqui) -> 
+const response =  await fetch(url) (sendo utilizada aqui).
+
+------------------------------------------------------------------------------- // --------------------------------------------------------------------------------
+
+2 - const responseJson: Para iterar com o array, é necessário os dados no formato Json, fazendo-se necessário sua conversão.
+
+
+const responseJson = await response.json();     -> Após sua execução ele converterá para json.
+
+Essa variável terá os mesmos resultados/dados que são recebidos da API e foram requisitados e transformando-os em json.
+
+. O response.json corresponde à todo o script de documentação dentro da API, por isso se faz necessário.
+
+------------------------------------------------------------------------------- // --------------------------------------------------------------------------------
+
+Iteração com o array:
+
+
+async function loadCharacters(url){
+    const mainContent = document.getElementById('main-content')
+    mainContent.innerHTML = '';
+
+    try{
+        const response = await fetch(url);
+        const responseJson = await response.json();
+
+        responseJson.results.forEach((character) => {
+
+    })
+
+    } catch(error){
+        alert('Erro ao carregar os personagens')
+        console.log(error)
+    }
+}
+
+
+Dentro da função, será feito a construção dos cards dos personagens:
+
+        responseJson.results.forEach((character) => {
+
+    })
+
+. Criar um método forEach.
+
+. O forEach receberá uma função anônima. 
+
+. Essa função receberá o character, sendo assim , ela vai iterar cada objeto do array e cada objeto do array será um personagem.
+
+. A partir disso, iremos criar os cards com os personagens
+
+. O '.results' levando em consideração a API de Star Wars, ela dá informações dos personagens, ou seja, os personagem estão dentro de results. Sendo assim, devemos consultar dentro da API
+  qual parte deve ser pego para que possa colocar.
+
+. forEach será para realizar um loop, pois ele é um laço de repetição e ele vai iterar com todos os objetos do array, Iterando objeto por objeto e ele estará sendo recebido em
+  'character'.
+
+
+------------------------------------------------------------------------------- // --------------------------------------------------------------------------------
+
+3. Criando os Cards: 
+
+async function loadCharacters(url){
+    const mainContent = document.getElementById('main-content')
+    mainContent.innerHTML = '';
+
+    try{
+        const response = await fetch(url);
+        const responseJson = await response.json();
+
+        responseJson.results.forEach((character) => {
+
+    })
+
+    } catch(error){
+        alert('Erro ao carregar os personagens')
+        console.log(error)
+    }
+}
+
+
+Construção dos cards dentro do try: Transcrevendo o HTML para JS
+
+    responseJson.results.forEach((character) => {
+        
+        const card = document.createElement("div")
+        card.style.backgroungImage = `url('*img do brimstone*')`
+        card.className = 'cards'
+
+        const characterNameBG = document.createElement('div')
+        characterNameBG.className = "character-name-bg"
+        
+    })
+
+
+
+. Criar uma variável (const card = ).
+
+. Utilizar um método dentro de document.(createElement)    -> document.createElement
+  Ele vai criar uma tag HTML podendo ser qualquer uma, div, span, h1, etc. É como se fôssemos na div de main-content (o qual está sendo especificado no getElementById) 
+  e criássemos uma tag.
+
+. Dentro de sua chave, abrimos aspas e colocamos qual elemento queremos criar (nesse caso é uma div). 
+
+. Iremos pegar todo o objeto da classe 'cards' e construi-lo com JS, suas divs, classes e span.
+
+. Ao criarmos a variável card, atribuimos à ele como uma div.    -> document.createElement('div')
+
+. Para cada variável, será uma transcrição de algum elemento de dentro do HTML.
+
+
+
+. Variável const card -> classe cards no HTML juntamente com o style.
+
+Manipular seu style:  
+
+const card = document.createElement("div")                  -> Criando a tag div
+card.style.backgroungImage = `url ('*img do brimstone*')`   -> Estilização da tag
+   
+. Começando pelo BG img, e passaremos para ele a imagem que estamos utilizando dentro do HTML mesmo, e ao invés de ser chamado por aspas "" será chamado por crases `` pois usaremos uma 
+  Template String. 
+  
+. A Template String foi usada para que possamos concatenar uma variável dentro da url da img, e essa url da img não pode ser estática, e sim dinâmica.  
+   
+
+Atribuir uma classe para a div que fora criada:  card.className = 'cards'  -> Criando a classe.
+
+. Iremos atribuir cards como uma classe para ela, pois esse é o nome que estamos usando lá dentro do HTML. 
+
+. Estamos apenas repetindo a estrutura do HTML (criando classes, usando style, criando spans, etc) dentro de JS. Pois criamos uma div (createElement), manipulamos o style e 
+  criamos uma classe (className = 'cards').
+
+
+
+. Variável const characterNameBG -> Classe character-name-bg no HTML 
+
+Criar elemento: const characterNameBG = document.createElement("div")
+
+Todo o processo de lógica é a mesma da div criada anteriormente, transcrever o HTML para o JS usando uma variável para criar uma tag (nesse caso uma div), e dentro dessa variável
+criar itens e atribuir classes de acordo com o que está dentro do HTML e à div no qual está se referindo.
+
+const characterNameBG = document.createElement('div')   -> Criando a tag
+characterNameBG.className = "character-name-bg"         -> Criando a classe.
+
+
+
+. Variável (nome do character em si) const characterName = document.createElement("span")
+
+const characterName = document.createElement("span")  -> Criando a tag
+characterName.className = "character-name"            -> Criando a classe
+
+
+
+Para esse span, o conteúdo por enquanto está estável (Brimstone) , e para que ele fique dinâmico, colocando o nome de cada personagem em character, usar a propriedade .innerText:
+
+const characterName = document.createElement("span")  -> Criando a tag
+characterName.className = "character-name"            -> Criando a Classe
+characterName.innerText = `${character.name}`         -> Modificando o texto da span ao puxar da API a informação
+
+
+innerText: Modificar o conteúdo do texto do elemento (Elemento esse characterName)
+
+O innerText receberá uma template string, por isso abrimos em `` , abriremos chaves {} e dentro dele terá o character (o qual está sendo recebido e execitadp dentro de forEach).
+O forEach está iterando com cada objeto do array e cada objeto do array é um personagem, ou seja, cada character desse equivale a um personagem. 
+Visto que, o objetivo dentro da span é a mudança do nome dos personagens, basta colocarmos o .name para puxarmos o nome dos personagens de dentro da API, nesse caso, teremos que 
+pesquisar dentro da API qual o valor equivalente ao nome dos personagens.
+
+------------------------------------------------------------------------------- // --------------------------------------------------------------------------------
+
+Visto que todos os elementos escritos em JS estão soltos, é necessário inseri-los um dentro do outro assim como no HTML:
+
+. Será usada a propriedade .appendChild -> characterNameBG.appendChild()
+
+appendChild pega o elemento (nesse caso characterNameBG) e insere um "filho" dentro dele, seria como "Insira tal elemento dentro de outro elemento" .
+
+
+
+Dito isso, colocaremos o characterName Dentro do characterNameBG , que ficaria dessa forma: 
+
+const characterName = document.createElement("span")  -> Criando a tag
+characterName.className = "character-name"            -> Criando a Classe
+characterName.innerText = `${character.name}`         -> Modificando o texto da span ao puxar da API a informação
+
+characterNameBG.appendChild(characterName)            -> Inserindo a tag characterName dentro de characterNameBG.
+
+
+
+Dessa forma, o characterName que é o span, vai para dentro da div characterNameBG.
+
+Seguindo essa linha de raciocínio, basta fazer para as outras tags criadas em JS, para que toda a inserção fique igual à do HTML.
+
+
+const characterName = document.createElement("span")  -> Criando a tag
+characterName.className = "character-name"            -> Criando a Classe
+characterName.innerText = `${character.name}`         -> Modificando o texto da span ao puxar da API a informação
+
+characterNameBG.appendChild(characterName)            -> Inserindo a classe characterName dentro da classe characterNameBG.
+card.appendChild(characterNameBG)                     -> Inserindo a classe characterNameBG dentro da classe card.
+mainContent.appendChild(card)                         -> Inserindo a classe card dentro da classe main-content
+
+
+
+
+Como todos os itens acima estão inseridos dentro de main-content no HTML, criaremos sua classe e sua tag dentro de JS também para que possamos inserir tudo nela
+não se faz necessário a criação de sua const, pois ela já se encontra aqui dentro de JS, por isso basta apenas usar o appendChild.
+
+
+------------------------------------------------------------------------------- // --------------------------------------------------------------------------------
+
+
+De forma resumida a partir do forEach:
+
+. forEach está iterando com cada objeto do array. -> forEach((character))
+
+. Para cada Iteração ele está gerando um character -> gerando um personagem 
+
+. Abaixo dele, criamos um card, ou seja, para cada personagem, será criado um card. (createElement)
+
+. Criamos os elementos e colocamos um dentro do outro (appendChild)
+
+
+------------------------------------------------------------------------------- // --------------------------------------------------------------------------------
+
+IMPORTANTE:
+
+Dpois da parte do forEach, antes do catch precisamos chamar a variável currentPageUrl e atribuir um novo valor a ela , sendo esse valor a url que receberemos toda vez que a função 
+loadCharacters for chamada. 
+
+currentPageUrl = url
+
+Isso se dá por que toda vez que a página for carregada ou que interagirmos em algo dentro da página web (botões por ex), o valor da variável será alterado dinamicamente, e para que
+essa dinâmica flua, devemos fazer essa alteração na variável dentro de try&catch, sendo colocada fora de try e anterior ao catch.
+
+
+------------------------------------------------------------------------------- // --------------------------------------------------------------------------------
+
+Para que a API role, basta excluírmos as 10 divs criadas dentro de main-content no HTML para que as estruturas feitas em JS consiga ser executada juntamente com a url da API, restando 
+apenas a main-content, pois todo seu conteúdo será gerado pelo JS.
+
+
+------------------------------------------------------------------------------- // --------------------------------------------------------------------------------
+
+Resultado do try:
+
+    try{
+        const response = await fetch(url);
+        const responeJson = await respone.json();
+
+        // Transcrevendo o HTML para JS:
+        
+        responeJson.description.forEach((character) => { 
+
+            
+            const card = document.createElement("div")
+            card.style.backgroundImage = `url('./img/01.Brimstone.jpg')`
+            card.className = "cards"
+
+            const characterNameBG = document.createElement("div")
+            characterNameBG.className = "character-name-bg"
+
+            const characterName = document.createElement("span")
+            characterName.className = "character-name"
+            characterName.innerText = `${character.displayName}`
+
+            // Inserção de elementos:
+
+            characterNameBG.appendChild(characterName)
+            card.appendChild(characterNameBG)
+            mainContent.appendChild(card)
+            
+        });
+        currentPageUrl = url
+    }catch(error){
+        alert('Erro ao carregar os personagens.')
+        console.log(error)
+    }
+
+
+------------------------------------------------------------------------------- // --------------------------------------------------------------------------------
+
+Código até o momento:
+
+let currentPageUrl = 'https://valorant-api.com/v1/agents';
+
+
+// Toda vez que a página for carregada e recarregada, rodar essa função:
+
+window.onload = async () => {
+    try{
+        await loadCharacters(currentPageUrl);
+    } catch(Error){
+        console.log(Error);
+        alert('Erro ao carregar informações dos cards.');
+    }
+};
+
+// O que a função loadCharacters fará ao ser rodado, no qual tem como objetivo limpar o conteúdo ao dar reload na page.
+
+async function loadCharacters(url){
+    const mainContent = document.getElementById('main-content');
+    mainContent.innerHTML = '';  // Limpa os resultados anteriores, manipulando o texto de um determinado elemento HTML.
+
+// Try e Catch: Armazenamento dos resultados da requisição / Iteração com o Array / conversão de dados para Json.
+
+    try{
+        const response = await fetch(url);
+        const responseJson = await response.json();  
+
+        // Transcrevendo o HTML para JS:
+        
+        responseJson.data.forEach((character) => { 
+
+            const card = document.createElement("div")
+            card.style.backgroundImage =`url('./img/01.Brimstone.jpg')`
+            card.className = "cards"
+
+            const characterNameBG = document.createElement("div")
+            characterNameBG.className = "character-name-bg"
+
+            const characterName = document.createElement("span")       
+            characterName.className = "character-name"
+            characterName.innerText = `${character.displayName}`     
+
+            // Inserção de elementos:
+
+            characterNameBG.appendChild(characterName)
+            card.appendChild(characterNameBG)
+            
+            mainContent.appendChild(card)
+            
+        });
+        
+        currentPageUrl = url
+
+    }catch(error){
+        alert('Erro ao carregar os personagens.')
+        console.log(error)
+    }
+}
+
+________________________________________________________________________________________________________________________________________________________________________________________
+
+ALTERAÇÃO DO BACKGROUND COM OS RESPECTIVOS PERSONAGENS:
+
+Cada personagem tem uma url específica, e em cada url será extraído o id específico. Mas nesse caso, usaremos os números que foi salvo as img.
+
+O objetivo será extrair o id contido na API e concatena-los com os da url. Para isso, será utilizado o método 'replace', por isso estamos usando Template String no link da url
+acima dentro do Código JS.
+
+Nese caso, como a API já possui o URL dos proprios personagens, basta nós usarmos uma template String para concatenar a url da API para a url de nosso código:
+
+card.style.backgroundImage = `url(${character.fullPortrait})`  
+
+------------------------------------------------------------------------------- // --------------------------------------------------------------------------------
+
+Na Template String: Caso dê algum erro, tirar o '/' após fullportrait
+
+card.style.backgroundImage =`url('https://media.valorant-api.com/agents/e370fa57-4757-3604-3648-499e1f642d3f/fullportrait/${character.url.replace(/\D/g, "")}.png')`  
+
+
+. Dentro de '${}' colocaremos os 'character' que estamos recebendo dentro de forEach.
+. Colocar '.url', mas nesse caso teremos de ver o nome dentro da API referente às img dos cards, nesse caso 'fullPortrait'.
+. Utilizar o método '.replace' e executa-lo '()'. Em sua execução extrairemos o id desejado.
+. Para extrair o id, usaremos uma expressão regular -> (RegExp): /\D/g, "" -> Ela busca um padrão dentro de um grupo de caracteres (pesquisar mais afundo sobre, pegar na descrição da aula 7)
+
+Expressão Regular (RegExp): /\D/g, "" :
+
+Ela vai buscar um padrão em cima de '/\D/g', ao dar a virgula, transformaremos tudo isso em uma string vazia ' "" '. Com isso, estamos removendo todos os caracteres de letra da 
+url e extraindo o id isoladamente.
+
+________________________________________________________________________________________________________________________________________________________________________________________
+
+ADICIONAR FUNCIONALIDADE AO BOTÃO E LOADING DA PAGINA:
+
+------------------------------------------------------------------------------- // --------------------------------------------------------------------------------
+
+Voltando para window.onload:
+
+window.onload = async () => {
+    try{
+        await loadCharacters(currentPageUrl);
+    } catch(Error){
+        console.log(Error);
+        alert('Erro ao carregar informações dos cards.');
+    }
+};
+
+const nextButton = document.getElementById('next-button')
+const nextButton = document.getElementById('back-button')
+
+nextButton.addEventListener('click', loadNextPage)
+backButton.addEventListener('click', loadPreviousPage)
+
+
+
+------------------------------------------------------------------------------- // --------------------------------------------------------------------------------
+
+1. Depois do bloco try/catch, adicionar const para atribuir Funcionalidades: 
+
+const nextButton = document.getElementById('next-button')
+const nextButton = document.getElementById('back-button')
+
+Usaremos a propriedade de document.getElementById para pegar o ID dentro do HTML e armazenar eles em variáveis.
+
+------------------------------------------------------------------------------- // --------------------------------------------------------------------------------
+
+2. Monitorar eventos que acontecerão nesses elementos usando o addEventListener:
+
+addEventListener():
+
+Monitora eventos de um determinado elemento, dentro de sua execução colocar qual evento monitorar e o que fazer quando o evento acontecer.
+Nesse caso o click, dito isso, toda vez que clicarmos no botão acontecerá algo, e quando clicarmos no botão next, executaremos a função loadNextPage (será criada) 
+e para voltar será loadPreviousPage.
+
+const nextButton = document.getElementById('next-button')
+const nextButton = document.getElementById('back-button')
+
+nextButton.addEventListener('click', loadNextPage)
+backButton.addEventListener('click', loadPreviousPage)
+
+------------------------------------------------------------------------------- // --------------------------------------------------------------------------------
+
+3. Adicionar verificações: next e previous está dentro da API do star wars
+
+Sendo o status dos botões 'disabled' no HTML, manipularemos conforme os resultados da API, podendo ele ser True ou False (disabled or enabled).
+
+Indo para o currentPageUrl redeclarada entre o Try&Catch do forEach e colocar novamente as Funcionalidades dos botões:
+
+const nextButton = document.getElementById('next-button')
+const nextButton = document.getElementById('back-button')
+
+nextButton.disable = !responeJson.next
+backButton.disable = !responeJson.previous
+
+backButton.disable = !responeJson.previous? "visible" : "hidden"
+
+currentPageUrl = url 
+
+
+Sendo uma const, ela funcionará dentro de escopos, sendo assim , como estamos usando essas variáveis dentro do escopo da função window.onload, podemos redeclara-las dentro
+do escopo da função loadCharacters.
+
+Iremos começar a fazer verifiações:
+
+Começaremos pelo nextButton.disabled, que ditaremos quando que ele será True ou False, dito isso, negaremos (!) a const responseJson.next . Dessa forma o botão estará desabilitado
+quando responeJson.next for falso (quando ele não estiver na página).
+
+nextButton.disable = !responeJson.next
+
+O mesmo se aplica com o backButton, porém inversamente:
+
+backButton.disable = !responeJson.previous? "visible" : "hidden"
+
+
+Verificação do botão hidden: Manipulando o estilo desse elemento, apontando para o 'visibility'
+
+backButton.style.visibility = responeJson.previous?
+
+Usaremos um operador ternário para verificarmos. Ao usar "?" Estamos fazendo uma pergunta ao sistema, caso a resposta for sim, daremos um "visible" para que os botões 
+fiquem amostra, e caso for false ":" dar um "hidden".
+
+
+________________________________________________________________________________________________________________________________________________________________________________________
+
+Implementando a lógica da programação: loadNextPage e loadPreviousPage.
+
+------------------------------------------------------------------------------- // --------------------------------------------------------------------------------
+
+Lógica:
+
+Quando o sistema assimilar um clique no botão, ele vai chamar a função loadNextPage, e essa função loadNextPage fará uma nova requisição para a API só para obter a url 'next'
+localizada dentro do API de star wars, ou seja, fazer a requisição para o endereço currentPageUrl que está armazenado na variável const respone e chamar novamente 
+a função loadCharacters, mas dessa vez , passando o 'responeJson.next' como argumento.
+
+Dessa forma, async function loadCharacters receberá a url 'next' que é da pag 2, executará todo o bloco de código (construindo os cards novamente) e no final a url mudará, pois 
+fora criado a currentPageUrl = url, pois ela foi recebida anteriormente em loadCharacters quando chamarmos a função loadNextPage através do clique no botão
+
+------------------------------------------------------------------------------- // --------------------------------------------------------------------------------
+
+. Utilizaremos o async para a função e faremos uma verificação usando if
+. O uso do operador ternário será usado (!), passar a currentPageUrl e dar um return.
+. Adicionar um try/catch.
+. Dentro do try, adicionar 2 constantes:
+    const response = await fetch(currentPageUrl)
+    const responeJson = await respone.json()
+
+const response: Como estamos usando fetch, se torna uma requisição para o endereço (currentPageUrl) que fora armazenado dentro da variável (respone) para a url currentPageUrl. 
+Ou seja, sendo ela uma promisse, usamos o async e o await. Repetindo o mesmo processo anterior.
+
+const responseJson: Conversão para json e executa-o.
+
+Dessa forma, ele fará a requisição, armazenará o resultado dentro de response, pegar o resultado, transforma-lo em Json e armazenar na variável responeJson.
+
+. Por fim, criar um await para criar o loadCharacters(), e ao invés de criar o currentPageUrl, passaremos responseJson.next:
+    await loadCharacters(responeJson.next) 
+
+O next é justamente a url localizada para next page na url do star wars, sendo assim, ele mandará como argumento aquele url.
+
+
+------------------------------------------------------------------------------- // --------------------------------------------------------------------------------
+
+Foi feito esse processo para prevenir um erro. 
+Se o valor da variável currentPageUrl for nulo, ele dará um return, interrompendo a execução da função nesse bloco em si e nao fazendo mais nada.
+
+Nessa função loadNextPage faremos uma nova requisição para API baseado no endereço da página 2, e se não tivermos a url currentPageUrl, não fará sentido executarmos essa função.
+Sendo assim, ele só executará a função quando existir um valor dentro dessa variável.
+
+Dentro da função, será adicionado um try/catch.
+
+async function loadNextPage() {
+    if (!currentPageUrl) return;
+    try{
+    const response = await fetch(currentPageUrl)
+    const responeJson = await respone.json()
+    
+    await loadCharacters(responseJson.next)
+
+    }catch(error){
+        console.log(error)
+        alert('Erro ao carregar a próxima página.')
+    }
+}
+
+------------------------------------------------------------------------------- // --------------------------------------------------------------------------------
+
+. Para o backButton é a mesma coisa, mudaremos apenas o nome:
+
+async function loadPreviousPage() {
+    if (!currentPageUrl) return;
+    try{
+    const response = await fetch(currentPageUrl)
+    const responeJson = await respone.json()
+    
+    await loadCharacters(responseJson.back)
+
+    }catch(error){
+        console.log(error)
+        alert('Erro ao carregar a página anterior.')
+    }
+}
+
+------------------------------------------------------------------------------- // --------------------------------------------------------------------------------
+
+Recap: Explicação de lógica: Aula 8 / Min: 7:50 e 11:45
+
+Inicialmente quando a página carregar pela primeira vez, o valor armazenado na variável currentPageUrl é a url colocada como recebida. Essa url chamará a função loadCharacters, vai 
+ser passada tal url e essa url vai ser recebida pela função loadCharacters, esperando receber tal url e com essa url ela irá construir os cards e vai renderizar tudo em tela.
+
+Ao clicar para próxima página, ele vai chamar a função loadNextPage. Essa função irá fazer uma nova requisição para a página atual (url atual) no qual por enquanto é a url inicial e vai 
+pegar o next (dentro da API) e vai chamar o loadCharacters denovo e vai passar a url da página 2 (responeJson.next). Dessa forma, ela vai chamar e mandar como argumento a url da página 2.
+Sendo assim, a função loadCharacters que está sendo executada pela segunda vez , ela está recebendo novamente uma outra url(url da página 2), dessa forma, ele vai limpar os resultados 
+anteriores e construirá novos cards baseados na url da página 2, construindo tudo e renderizando em tela.
+
+O macete ao adicionar no final: currentPageUrl = url é que nao teremos a url colocada inicialmente como valor, e sim a url da página 2 e assim em diante.
+Por isso quando clicamos no botão next e a função loadNextPage é chamada, a requisição ja não é feita mais para a página 1, pois o valor que está locado em currentPageUrl já não
+será mais o valor da page 1, e sim da page 2. Dito isso, ele fará uma nova requisição para a página 2 e na página 2 ele pegará o next da página 2, que no caso é a página 3, chamando
+a função e chamando a página 3.
+
+A mesma lógica se aplica ao loadPreviousPage.
+
+________________________________________________________________________________________________________________________________________________________________________________________
+
+IMPLEMENTANDO O MODAL: INFORMAÇÕES DOS PERSONAGENS 
+
+------------------------------------------------------------------------------- // --------------------------------------------------------------------------------
+
+Voltar ao HTML e, na div main-content começar a cria-lo e Estilizar no CSS:
+
+. Criar div de classe e id modal, pois esse será o endereço usado para manipularmos.
+
+. Adicionar uma função onclick, e nele executaremos uma função, o qual fechará esse modal, ou seja, ao clicar, ele abrirá o modal e quando clicarmos em qualquer outro lugar ele executará 
+  essa função, ou seja, fechará o modal -> onclick = "hideModal()". Isso pode ser colocado tanto dentro do HTML quanto pelo JS.
+
+. Dentro da div modal, será criado uma outra div de classe e id "modal-content".
+
+------------------------------------------------------------------------------- // --------------------------------------------------------------------------------
+
+Criando a função hideModal(): sua localização é por último, no final do código.
+
+function hideModal(){
+    const modal = document.getElementById("modal")
+    modal.style.visibility = "hidden"
+}
+
+* Na transcrição dos elementos HTML > JS:
+
+card.onclick = () => {
+    const modal = document.getElementById("modal")
+    modal.style.visibility = "visible"
+}
+
+------------------------------------------------------------------------------- // --------------------------------------------------------------------------------
+
+. Dentro da função criaremos uma const que representará o elemento do modal, e dentro dele usaremos a propriedade document.getElementById. Dessa forma a variável passa a representar o 
+  elemento modal, e com isso será possível manipular os elementos dentro de JS.
+
+function hideModal(){
+    const modal = document.getElementById("modal")
+}
+
+------------------------------------------------------------------------------- // --------------------------------------------------------------------------------
+
+
+. Criado o elemento modal dentro de JS, a primeira coisa para ser manipulada é seu style, no qual será adicionada o visibility, e essa função terá como funcionalidade esconder 
+  o elemento. Após isso, ir para o CSS e adicionar visibility:hidden inicialmente ele ficará escondido em tela e só aparecerá quando clicarmos no card.
+
+  modal.style.visibility = "hidden"
+
+------------------------------------------------------------------------------- // --------------------------------------------------------------------------------
+
+. Dentro do JS, na parte de transcrição dos elementos HTML > JS, colocar a função de clique nos cards, sendo assim, cria-se uma arrow function, sua função é fazer com que esse modal 
+  apareça.
+
+. Dentro da arrow function, estamos localizado em um outro escopo, sendo assim, faz-se necessário pegarmos criar uma const para pegar os elementos novamente pela propriedade 
+  document.getElementById.
+
+. Feito isso, alteraremos a visibilidade ao clicarmos, ou seja, de hidden > visible. Para isso, repetiremos o mesmo processo anterior, porém dessa vez é para ativar a visibilidade:
+  modal.style.visibility = "visible".  
+
+card.onclick = () => {
+    const modal = document.getElementById("modal")
+    modal.style.visibility = "visible"
+}
+
+Isso foi feito pois inicialmente o estado do elemente tem que ser hidden, pois será acionado apenas quando clicarmos nele, e para cada estado em tela, foi criado uma função
+sendo um para hidden e outra para ativar quando clicarmos para abrir os cards.
+
+__________________________________________________________________________________________________________________________________________________________________________________
+
+ADICIONANDO INFORMAÇÕES DENTRO DO MODAL:
+
+Dentro da função arrow "card.onclick" criaremos as informações que colocaremos dentro do modal. Cada informação é diferente das demais. 
+Lembrando que nessa etapa, estaremos criando os personagens como se estivéssemos dentro do HTML, criando div, atribuindo classes, etc.
+
+------------------------------------------------------------------------------- // --------------------------------------------------------------------------------
+
+Parte à princípio o código:
+
+    card.onclick = () => {
+    const modal = document.getElementById("modal")
+    modal.style.visibility = "visible"
+    }
+
+------------------------------------------------------------------------------- // --------------------------------------------------------------------------------
+
+1. Limpar os dados anteriores. Lógica usada na navegação das paginas:
+
+    card.onclick = () => {
+    const modal = document.getElementById("modal")
+    modal.style.visibility = "visible"
+
+    const modalContent = document.getElementById("modal-content")
+    modalContent.innerHTML = ''
+    }
+
+. Criar uma const e atribuir a propriedade document.getElementById("modal-content"), pois esse será o objeto que utilizaremos para manipularmos.
+
+. Ao pegar o modal-content, dar um innerHTML para alterarmos o HTML passando uma string vazia '' para que limpe e dê um "reset" em todo conteúdo que estiver dentro de 'modal-content'.
+
+------------------------------------------------------------------------------- // --------------------------------------------------------------------------------
+
+2. Criar a imagem do personagem:
+
+Ela aparecerá novamente dentro de modal. 
+
+
+    card.onclick = () => {
+    const modal = document.getElementById("modal")
+    modal.style.visibility = "visible"
+
+    const modalContent = document.getElementById("modal-content")
+    modalContent.innerHTML = ''
+
+    const characterImage = document.createElement("div")
+    characterImage.style.backgroundImage = `${character.killfeedPortrait}`
+    characterImage.className = "character-image"
+    }
+
+. Criar uma const com a propriedade document.createElement("div") e ela será uma div.
+
+. Daremos um backgroundImage (como a API é diferente, daremos um icon) e dentro da Template String, colocar determinada propriedade referente à API.
+
+. Feito isso, daremos uma classe à ele de "character-image"   -> Assim que terminarmos aqui no JS, ela será estilizada no CSS.
+
+------------------------------------------------------------------------------- // --------------------------------------------------------------------------------
+
+3. Criar spans das informações, da mesma forma e estrutura anterior. É possivel pegar os elementos através de "character" pois o nosso forEach está recebendo-o.
+
+    card.onclick = () => {
+    const modal = document.getElementById("modal")
+    modal.style.visibility = "visible"
+
+    const modalContent = document.getElementById("modal-content")
+    modalContent.innerHTML = ''
+
+    const characterImage = document.createElement("div")
+    characterImage.style.backgroundImage = `${character.killfeedPortrait}`
+    characterImage.className = "character-image"
+
+    const name = document.createElement("span")
+    name.className = "characater-details"
+    name.innerText = `Name: ${characater.displayName}`
+    }
+
+. Criar uma const de propriedade document.createElement("span"). -> const name = document.createElement("span")
+
+. Atribuir uma classe à ele -> name.className = "character-details". Essa classe será dado para todos os spans e todos os spans terão a mesma classe.
+
+. Daremos um innerText pois adicionaremos um texto dentro desse span/conteúdo -> name.innerText =
+
+. Para colocar o conteúdo, chamaremos uma Template String, daremos um "título" para cada span e com isso usaremos o mesmo processo de character.(respectiva chave da API).
+
+    name.innerText = `Name: ${character.displayName}`   Nesse caso, na API do valorant os nomes estão em displayName.
+
+
+Para cada span faremos o mesmo processo, porém mudaremos apenas as chaves de acordo com as informações que queremos colocar. Nosso caso será diferente, pois nossa API
+tem chaves diferentes e tipos de informações também.
+
+OBS: DECIDIR QUAIS INFORMAÇÕES COLOCAR E COMO COMPORTAR DENTRO DA MODAL.
+
+Role img:
+
+    const name = document.createElement("span")
+    name.className = "character-details"
+    name.innerText = `Name: ${characater.displayIcon}`
+
+Role:
+
+    const characaterRole = document.createElement("span")
+    name.className = "character-details"
+    name.innerText = `Skills: ${characater.role}`
+
+Abilities:
+
+    const name = document.createElement("span")
+    name.className = "character-details"
+    name.innerText = `Name: ${characater.abilities}`
+
+------------------------------------------------------------------------------- // --------------------------------------------------------------------------------
+
+4. Colocando tudo dentro do modal com append child -> modalContent.appendChild()
+
+    card.onclick = () => {
+    const modal = document.getElementById("modal")
+    modal.style.visibility = "visible"
+
+    const modalContent = document.getElementById("modal-content")
+    modalContent.innerHTML = ''
+
+    const characterImage = document.createElement("div")                  -> data / killfeedPortrait
+    characterImage.style.backgroundImage = `${character.killfeedPortrait}`
+    characterImage.className = "character-image"
+
+    const characterRoleImg = document.createElement("span")               -> role / displayIcon
+    name.className = "characater-details"
+    name.innerText = `${characater.displayIcon}`
+
+    const characterRole = document.createElement("span")                 -> role / displayName
+    name.className = "character-details"
+    name.innerText = `Role: ${characater.displayName}`
+
+    const characterAbilities = document.createElement("span")             -> abilities / 
+    name.className = "character-details"
+    name.innerText = `Name: ${characater.abilities}`
+
+
+    modalContent.appendChild(characterImage)
+    modalContent.appendChild(roleImg)
+    modalContent.appendChild(characterRole)
+    modalContent.appendChild(characterAbilities)
+
+    }
+
+. A primeira coisa que colocaremos dentro de sua execução é a imagem.
+
+. E ir fazendo isso posteriormente com os elementos criados/adicionados.
+
+. Após isso, ir estilizar dentro do CSS.
+
+__________________________________________________________________________________________________________________________________________________________________________________
+
+CONVERSÃO DE DADOS RECEBIDOS DA API -> TRADUZIR OS TEXTOS LEVANDO EM CONSIDERAÇÃO A API DO STAR WARS
+
+Nao farei pois a pag web será em inglês, será mais pelo aprendizado.
+
+------------------------------------------------------------------------------- // --------------------------------------------------------------------------------
+
+Função da conversão da cor dos olhos:
+
+function convertEyeColor(eyeColor){
+    const cores = {
+        blue: "azul",
+        brown: "marrom",
+        green: "verde",
+        yellow: "amarelo",
+        black: "preto",
+        pink: "rosa",
+        red: "vermelho",
+        orange: "laranja",
+        hazel: "avela",
+        unknown: "desconhecida",
+    };
+
+    return cores[eyeColor.toLowerCase()] || eyeColor;
+}
+
+. Recebe os dados de dentro da API (eyeColor) para conversão.
+
+. Foi criado um objeto chamado cores e dentro foi colocado todas as cores que se encontram na API.
+
+. Em return, ela compara se o valor que está sendo recebido da API ele está presente dentro do objeto cores, caso ele estiver, será atribuiro o valor que está na devida chave, caso
+  nao estiver, ele retorna o valor original (eyeColor);
+
+. toLowerCase é para deixar toda a chave igual, sendo assim foi uma opcional.
+
+O return ele é bastante usado em funções para quando se faz necessário processar um dado, converte-lo e retornar o resultado desse processamento para algum lugar.
+
+
+Feito a conversão com o uso da função, basta adicionarmos dentro do elemento criado anteriormente.
+
+Levar em consideração o código da API do star wars e da aula:  Aula 10 / 23:30 min
+
+const eyeColor = document.createElement("span")
+eyeColor.className = "character-details"
+eyeColor.innerText = `Cor dos olhos: ${convertEyeColor(character.eye_color)}`
+
+Dessa forma, o resultado será o callback dessa função, ou seja, o que a função vai retornar.
+
+------------------------------------------------------------------------------- // --------------------------------------------------------------------------------
+
+Função da conversão do peso:
+
+function convertHeight(height){
+    if(height === "unknown"){
+        return "desconhecida"
+    }
+
+    return(height/100).toFixed(2);
+}
+
+
+
+
+. A função vai esperar receber da API o height.
+
+. Criar uma verificação: Se o que recebermos for identico ('===') à unknown, retornar desconhecida.
+
+. Caso contrário , o return será a altura divida por 100 -> (height / 100) 
+
+. Colocar um '.toFixed(2)' pois ao dar números quebrados, ele arrumará o valor para 2 casas decimais.
+
+
+Segue o exemplo levando em consideração os dados da API do Star Wars:
+
+const characterHeight = document.createElement("span")
+characterHeight.className = "character-details"
+characterHeight.innerText = `Altura: ${convertHeight(character.height)}`
+
+------------------------------------------------------------------------------- // --------------------------------------------------------------------------------
+
+Função de conversão de peso:
+
+function convertMass(height){
+    if(mass === "unknown"){
+        return "desconhecido"
+    }
+
+    return `${mass} kg`
+}
+
+. Na lógica do if, funciona da mesma maneira do height.
+
+. Em seu retorno, retornaremos o mesmo dado da API porém adicionando o kg de quilos.
+
+
+Segue o exemplo levando em consideração os dados da API do star wars:
+
+const characterMass = document.createElement("span")
+characterMass.className = "character-details"
+characterMass.innerText = `Peso: ${convertMass(character.mass)}`
+
+------------------------------------------------------------------------------- // --------------------------------------------------------------------------------
+
+Função de conversão de data:
+
+function convertBirthYear(birthYear){
+    if(birthYear === "unknown"){
+        return "desconhecido"
+    }
+
+    return birthYear
+}
+
+Segue o exemplo levando em consideração os dados da API do star wars:
+
+const birthYear = document.createElement("span")
+birthYear.className = "character-details"
+birthYear.innerText = `Peso: ${convertBirthYear(character.birthYear)}`
+
+------------------------------------------------------------------------------- // --------------------------------------------------------------------------------
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
